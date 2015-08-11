@@ -1,8 +1,6 @@
 FROM ubuntu:trusty
 MAINTAINER Tyrik Zhao <t@tyrik.io>
 
-ENTRYPOINT echo "Welcome!"
-
 ADD app/ /app/
 
 RUN apt-get install -y curl software-properties-common zip unzip && apt-get update
