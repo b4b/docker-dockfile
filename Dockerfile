@@ -1,5 +1,22 @@
 FROM ubuntu:trusty
-MAINTAINER Feng Honglin <hfeng@tutum.co>
+MAINTAINER Tyrik Zhao <t@tyrik.io>
+
+ENTRYPOINT echo "Welcome!"
+
+ADD app/ /app/
+
+RUN apt-get install -y curl software-properties-common zip unzip
+RUN apt-get install -y python-software-properties python g++ make
+RUN add-apt-repository ppa:chris-lea/node.js
+RUN apt-get update
+RUN apt-get install -y nodejs
+RUN cd /app/
+RUN curl -L https://ghost.org/zip/ghost-latest.zip -o ghost.zip
+RUN unzip ghost.zi
+RUN sed -i -e 's/127.0.0.1/0.0.0.0/g' ghost/config.example.js
+RUN npm install --production
+RUN npm install -g pm2 
+RUN NODE_ENV=production pm2 start index.js --name "ghost"
 
 RUN apt-get update && \
     apt-get install -y nginx && \
@@ -7,8 +24,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-ADD app/ /app/
+ADD config/default.conf /etc/nginx/default.conf
 
+
+
+EXPOSE 2368
 EXPOSE 80
 EXPOSE 443
 
