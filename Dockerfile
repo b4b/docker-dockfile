@@ -1,4 +1,4 @@
-FROM tyrik/blog:v0.1.3
+FROM tyrik/blog
 MAINTAINER tyrik <t@tyrik.io>
 
 EXPOSE 80
