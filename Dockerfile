@@ -5,11 +5,12 @@ ENTRYPOINT echo "Welcome!"
 
 ADD app/ /app/
 
-RUN apt-get install -y curl software-properties-common zip unzip
-RUN apt-get install -y python-software-properties python g++ make
-RUN add-apt-repository ppa:chris-lea/node.js
+RUN apt-get install -y curl software-properties-common zip unzip && apt-get update
+RUN curl -sL https://deb.nodesource.com/setup | bash -
 RUN apt-get update
 RUN apt-get install -y nodejs
+RUN apt-get install build-essential
+ENTRYPOINT node -v && npm -v
 RUN cd /app/
 RUN curl -L https://ghost.org/zip/ghost-latest.zip -o ghost.zip
 RUN unzip ghost.zi
