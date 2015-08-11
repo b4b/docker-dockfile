@@ -14,7 +14,7 @@ ENTRYPOINT node -v && npm -v
 RUN cd /app/
 RUN curl -L https://ghost.org/zip/ghost-latest.zip -o ghost.zip
 RUN unzip ghost.zip
-RUN sed 's/127.0.0.1/0.0.0.0/' /ghost/config.example.js > /ghost/config.js && \
+RUN sed 's/127.0.0.1/0.0.0.0/' /ghost/config.example.js > /ghost/config.js
 RUN npm install --production
 RUN npm install -g pm2 
 RUN NODE_ENV=production pm2 start index.js --name "ghost"
