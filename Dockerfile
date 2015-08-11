@@ -28,9 +28,11 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 ADD config/default.conf /etc/nginx/default.conf
 
 
-
 EXPOSE 2368
 EXPOSE 80
 EXPOSE 443
 
+# Define default command.
 CMD ["/usr/sbin/nginx"]
+CMD ["app", "/app"]
+
