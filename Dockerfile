@@ -7,7 +7,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-ADD sites-enabled/ /etc/nginx/sites-enabled/
 ADD app/ /app/
 
 EXPOSE 80
